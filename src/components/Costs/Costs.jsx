@@ -4,6 +4,7 @@ import Card from "../UI/Card";
 import CostsFilter from "./CostsFilter";
 import { useState } from "react";
 import CostsList from "./CostsList";
+import CostsDiagram from "../Diagram/CostsDiagram";
 
 export default function Costs(props) {
   const [selectedYear, setSelectedYear] = useState("2022");
@@ -15,6 +16,7 @@ export default function Costs(props) {
 
   const filteredCosts = props.costs.filter((cost) => {
     const date = new Date(cost.date);
+
     return date.getFullYear().toString() === selectedYear;
   });
 
@@ -25,6 +27,7 @@ export default function Costs(props) {
           defaultValue={selectedYear}
           onChangeYear={yearChangeHandler}
         />
+        <CostsDiagram costs={filteredCosts} />
         <CostsList costs={filteredCosts} />
       </Card>
     </div>
